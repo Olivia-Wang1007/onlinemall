@@ -3,30 +3,28 @@
     
     <div class="goods-item" v-for="item in goodslist" :key="item.id" @click="goDetail(item.id)">
       <img :src="item.img_url" alt="">
-      <h1 class="title">{{item.title}}</h1>
+      <h1 class="title">{{ item.title }}</h1>
       <div class="info">
         <p class="price">
-          <span class="now">￥{{item.sell_price}}</span>
-          <span class="old">￥{{item.market_price}}</span>
+          <span class="now">￥{{ item.sell_price }}</span>
+          <span class="old">￥{{ item.market_price }}</span>
         </p>
         <p class="sell">
           <span>热卖中</span>
-          <span>剩{{item.stock_quantity}}件</span>
+          <span>剩{{ item.stock_quantity }}件</span>
         </p>
       </div>
     </div>
-<mt-button type="danger" size="large" @click="getMore">加载更多</mt-button>
 
 
-    
-
+    <mt-button type="danger" size="large" @click="getMore">加载更多</mt-button>
   </div>
 </template>
 
 <script>
 export default {
-      data() {
- 
+  data() {
+   
     return {
       pageindex: 1, 
       goodslist: [] 
@@ -37,7 +35,7 @@ export default {
   },
   methods: {
     getGoodsList() {
-     
+      // 获取商品列表
       this.$http
         .get("api/getgoods?pageindex=" + this.pageindex)
         .then(result => {
@@ -47,17 +45,18 @@ export default {
           }
         });
     },
-     getMore() {
+    getMore() {
       this.pageindex++;
       this.getGoodsList();
     },
-    goDetail(id){
-        this.$router.push("/home/goodsinfo/"+id)
-    } 
-  }
-}
-</script>
+    goDetail(id) {
 
+      console.log(this);
+      this.$router.push({ name: "goodsinfo", params: { id } });
+    }
+  }
+};
+</script>
 
 <style lang="scss" scoped>
 .goods-list {
@@ -65,7 +64,6 @@ export default {
   flex-wrap: wrap;
   padding: 7px;
   justify-content: space-between;
-  padding-bottom:50px;
 
   .goods-item {
     width: 49%;

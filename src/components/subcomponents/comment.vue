@@ -1,8 +1,8 @@
 <template>
-   <div class="cmt-container">
+  <div class="cmt-container">
     <h3>发表评论</h3>
     <hr>
-    <textarea placeholder="请输入要发表的内容（最多吐槽120字）" maxlength="120" v-model="msg"></textarea>
+    <textarea placeholder="请输入要BB的内容（做多吐槽120字）" maxlength="120" v-model="msg"></textarea>
 
     <mt-button type="primary" size="large" @click="postComment">发表评论</mt-button>
 
@@ -21,14 +21,15 @@
     <mt-button type="danger" size="large" plain @click="getMore">加载更多</mt-button>
   </div>
 </template>
+
 <script>
 import { Toast } from "mint-ui";
 export default {
   data() {
     return {
       pageIndex: 1, // 默认展示第一页数据
-      comments: [] ,
-      msg:'',// 所有的评论数据
+      comments: [], // 所有的评论数据
+      msg: "" // 评论输入的内容
     };
   },
   created() {
@@ -41,8 +42,7 @@ export default {
         .get("api/getcomments/" + this.id + "?pageindex=" + this.pageIndex)
         .then(result => {
           if (result.body.status === 0) {
-            // this.comments = result.body.message;
-            // 每当获取新评论数据的时候，不要把老数据清空覆盖，而是应该以老数据，拼接上新数据
+            
             this.comments = this.comments.concat(result.body.message);
           } else {
             Toast("获取评论失败！");
@@ -54,21 +54,28 @@ export default {
       this.pageIndex++;
       this.getComments();
     },
-    postComment(){
-      this.$http.post('api/postcomment/'+this.$route.params.id,{
-        content:this.msg.trim()
-      })
-      .then(function(result){
-        if(result.body.status===0){
-          var cmt={
-            user_name: "匿名用户",
+    postComment() {
+      // 校验是否为空内容
+      if (this.msg.trim().length === 0) {
+        return Toast("评论内容不能为空！");
+      }
+
+      this.$http
+        .post("api/postcomment/" + this.$route.params.id, {
+          content: this.msg.trim()
+        })
+        .then(function(result) {
+          if (result.body.status === 0) {
+      
+            var cmt = {
+              user_name: "匿名用户",
               add_time: Date.now(),
               content: this.msg.trim()
-          };
-           this.comments.unshift(cmt);
+            };
+            this.comments.unshift(cmt);
             this.msg = "";
-        }
-      });
+          }
+        });
     }
   },
   props: ["id"]
@@ -80,8 +87,6 @@ export default {
   h3 {
     font-size: 18px;
   }
-  padding-left: 10px;
-  padding-right: 10px;
   textarea {
     font-size: 14px;
     height: 85px;
@@ -104,4 +109,3 @@ export default {
   }
 }
 </style>
-

@@ -36,7 +36,7 @@ export default {
       // 获取新闻列表
       this.$http.get("api/getnewslist").then(result => {
         if (result.body.status === 0) {
-          // 如果没有失败，应该把数据保存到 data 上
+       
           this.newslist = result.body.message;
         } else {
           Toast("获取新闻列表失败！");
@@ -57,11 +57,8 @@ export default {
       font-size: 12px;
       color: #226aff;
       display: flex;
-      font-family: "Microsoft YaHei"; 
       justify-content: space-between;
     }
   }
-  padding-top: 40px;
-  padding-bottom: 40px;
 }
 </style>

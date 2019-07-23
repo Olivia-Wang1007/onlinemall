@@ -8,15 +8,15 @@
 
     <hr>
 
-    <!-- 缩略图区域 -->
+    <!-- 缩略图 -->
     <div class="thumbs">
       <img class="preview-img" v-for="(item, index) in list" :src="item.src" height="100" @click="$preview.open(index, list)" :key="item.src">
     </div>
 
-    <!-- 图片内容区域 -->
+    <!-- 图片内容 -->
     <div class="content" v-html="photoinfo.content"></div>
 
-    <!-- 放置一个现成的 评论子组件 -->
+    <!--评论子组件 -->
     <cmt-box :id="id"></cmt-box>
   </div>
 </template>
@@ -50,12 +50,10 @@ export default {
       // 获取缩略图
       this.$http.get("api/getthumimages/" + this.id).then(result => {
         if (result.body.status === 0) {
-          // 循环每个图片数据，补全图片的宽和高
           result.body.message.forEach(item => {
             item.w = 600;
             item.h = 400;
           });
-          // 把完整的数据保存到 list 中
           this.list = result.body.message;
         }
       });

@@ -1,11 +1,14 @@
 <template>
-  <div class="tp">
+  <div>
 
     <!-- 轮播图区域 -->
-<swiper :lunbotuList="lunbotuList" :isfull="true"></swiper>
+    <swiper :lunbotuList="lunbotuList" :isfull="true"></swiper>
 
-<ul class="mui-table-view mui-grid-view mui-grid-9">
-      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to="/home/newslist">
+
+  
+    <ul class="mui-table-view mui-grid-view mui-grid-9">
+      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+        <router-link to="/home/newslist">
               <img src="../../images/menu1.png" alt="">
               <div class="mui-media-body">新闻资讯</div></router-link></li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to="/home/photolist">
@@ -24,7 +27,6 @@
               <img src="../../images/menu6.png" alt="">
               <div class="mui-media-body">联系我们</div></a></li>
   </ul> 
-    
 
   </div>
 </template>
@@ -32,6 +34,7 @@
 <script>
 import { Toast } from "mint-ui";
 import swiper from "../subcomponents/swiper.vue";
+
 export default {
   data() {
     return {
@@ -43,30 +46,26 @@ export default {
   },
   methods: {
     getLunbotu() {
-      // 获取轮播图数据的方法
-      this.$http.get("http://www.liulongbin.top:3005/api/getlunbo").then(result => {
-        // console.log(result.body);
+   
+      this.$http.get("api/getlunbo").then(result => {
+       
         if (result.body.status === 0) {
-          // 成功了
+          
           this.lunbotuList = result.body.message;
         } else {
-          // 失败的
+          
           Toast("加载轮播图失败。。。");
         }
       });
     }
   },
-  components:{
+  components: {
     swiper
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.tp{
-  padding-top: 40px;
-}
-
 .mui-grid-view.mui-grid-9 {
   background-color: #fff;
   border: none;
@@ -75,7 +74,7 @@ export default {
     height: 60px;
   }
 
-  .mui-media-body{
+  .mui-media-body {
     font-size: 13px;
   }
 }

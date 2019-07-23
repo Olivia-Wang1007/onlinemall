@@ -1,7 +1,7 @@
 <template>
-  <div class="tp">
+  <div>
     
-    <!-- 顶部滑动条 -->
+    <!-- 顶部滑动条区域 -->
     <div id="slider" class="mui-slider">
       <div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
         <div class="mui-scroll">
@@ -13,7 +13,7 @@
 
     </div>
 
-    <!-- 图片列表 -->
+    <!-- 图片列表区域 -->
     <ul class="photo-list">
       <router-link v-for="item in list" :key="item.id" :to="'/home/photoinfo/' + item.id" tag="li">
         <img v-lazy="item.img_url">
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-
+// 1. 导入 mui 的js文件
 import mui from "../../lib/mui/js/mui.min.js";
 
 export default {
@@ -40,21 +40,19 @@ export default {
   },
   created() {
     this.getAllCategory();
-   
     this.getPhotoListByCateId(0);
   },
   mounted() {
-
+    
     mui(".mui-scroll-wrapper").scroll({
-      deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+      deceleration: 0.0005 
     });
   },
   methods: {
     getAllCategory() {
-      // 获取所有的图片分类
+      
       this.$http.get("api/getimgcategory").then(result => {
         if (result.body.status === 0) {
-          
           result.body.message.unshift({ title: "全部", id: 0 });
           this.cates = result.body.message;
         }
@@ -76,9 +74,7 @@ export default {
 * {
   touch-action: pan-y;
 }
-.tp{
-    padding-top: 35px;
-}
+
 .photo-list {
   list-style: none;
   margin: 0;

@@ -1,16 +1,19 @@
 <template>
-    <div>
-       <cmtbox :id="$route.params.id"></cmtbox>
-    </div>
+  <div>
+    <cmtbox :id="$route.params.id"></cmtbox>
+  </div>
 </template>
+
 <script>
-import cmtbox from '../subcomponents/comment.vue'
+import cmtbox from "../subcomponents/comment.vue";
+
 export default {
-    components:{
-        cmtbox
-    }
-}
+  components: {
+    cmtbox
+  }
+};
 </script>
-<style lang="sass" scoped>
+
+<style lang="scss" scoped>
 
 </style>
