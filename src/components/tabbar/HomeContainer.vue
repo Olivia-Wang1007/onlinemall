@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="tp">
 
     <!-- 轮播图区域 -->
 <swiper :lunbotuList="lunbotuList" :isfull="true"></swiper>
@@ -63,7 +63,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.tp{
+  padding-top: 40px;
+}
 
 .mui-grid-view.mui-grid-9 {
   background-color: #fff;

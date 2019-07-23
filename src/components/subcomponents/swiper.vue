@@ -9,29 +9,24 @@
 </template>
 <script>
 export default {
-    props:["lunbotuList"]
+    props:["lunbotuList", "isfull"]
 }
 </script>
 <style lang="scss" scoped>
 .mint-swipe {
   height: 200px;
-  margin-top: 40px;
 
   .mint-swipe-item {
-    &:nth-child(1) {
-      background-color: red;
-    }
-    &:nth-child(2) {
-      background-color: blue;
-    }
-    &:nth-child(3) {
-      background-color: cyan;
-    }
+    text-align: center;
 
     img {
-      width: 100%;
+      // width: 100%;
       height: 100%;
     }
   }
+}
+
+.full {
+  width: 100%;
 }
 </style>
