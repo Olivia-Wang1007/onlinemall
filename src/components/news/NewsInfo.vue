@@ -53,7 +53,7 @@ export default {
 
 <style lang="scss">
 .newsinfo-container {
-  padding: 0 4px;
+  padding: 0 10px;
   .title {
     font-size: 16px;
     text-align: center;
@@ -69,6 +69,7 @@ export default {
   .content {
     img {
       width: 100%;
+
     }
   }
 }

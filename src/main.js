@@ -132,6 +132,12 @@ Vue.use(MintUI)
 import 'mint-ui/lib/style.css'
 
 
+Vue.filter('setWH',(url , arg)=>{
+  return url.replace(/w\.h/,arg);
+});
+import axios from 'axios'
+Vue.prototype.axios=axios;
+
 // 安装 图片预览插件
 import VuePreview from 'vue-preview'
 Vue.use(VuePreview)
