@@ -1,0 +1,2 @@
+# onlinemall
+npm install
